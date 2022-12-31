@@ -53,6 +53,8 @@ typedef struct Option {
     int top;
   } info;
   int pos;
+  int i;
+  int j;
 } Option;
 
 #define ULINK(x) (((LinkNode *) x)->prev)
@@ -263,6 +265,8 @@ create_model(int **matrix, int nrows, int ncols)
 	  first_pos = pos;
 	}
 	Option *op = (Option *) makeNode(Option);
+	op->i = i;
+	op->j = j;
 	op->pos = pos;
 	op->info.top = j+1;
 	model->node_pool[pos++] = (LinkNode *) op;
@@ -381,8 +385,10 @@ algorithmX(Model *model)
   Item   *item = pick_mrv_item(model, model->item_head);
 
   if (item == NULL) {
-    for (int i = 0; i <= stack_pointer; i++)
-      printf("%d ", stack[i]);
+    for (int i = 0; i <= stack_pointer; i++) {
+      int pos = stack[i];
+      printf("%d ",  ((Option *) (model->node_pool[pos]))->i);
+    }
     printf("\n");
     return;
   }
@@ -453,6 +459,7 @@ int main()
     }
   }
   model = create_model(matrix, nrows, ncols);
+  print_model(model);
   algorithmX(model);
   
   return 0;
