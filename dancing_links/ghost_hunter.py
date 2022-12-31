@@ -67,6 +67,7 @@ Row = namedtuple('Row', ['block_col', 'cell_ids', 'light_cell_ids'])
 def try_put_block(Blk):
     r = []
     for t in range(0, 4):
+        if Blk.name == 'F' and t > 1: continue
         new_cells = [rotate90(p, t) for p in Blk.cells]
         for i in range(1, 5):
             for j in range(1, 5):
