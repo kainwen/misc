@@ -443,7 +443,6 @@ algorithmX(Model *model)
 
 int main()
 {
-
   for(int i = 0; i < 128; i++)
     stack[i] = -1;
   
@@ -459,7 +458,6 @@ int main()
     }
   }
   model = create_model(matrix, nrows, ncols);
-  print_model(model);
   algorithmX(model);
   
   return 0;
